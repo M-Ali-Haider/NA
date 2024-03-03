@@ -1,0 +1,23 @@
+.enterAssigned{
+    border-radius: 25px;
+    padding: 30px;
+    width: 15%;
+    overflow: hidden;
+    background-color: rgba(240,240,240,255);
+}
+
+.enterAssigned input{
+    width: 80%;
+    border: 1px solid #a8a8a8;
+}
+
+@media (max-width:700px) {
+    .enterAssigned{
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+}

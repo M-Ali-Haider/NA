@@ -1,0 +1,10 @@
+.enterIteration{
+    border-radius: 25px;
+    padding: 30px;
+    width: 50%;
+    background-color:rgba(240,240,240,255) ;
+}
+.enterIteration input{
+    width: 70px;
+    border: 1px solid #a8a8a8;
+}

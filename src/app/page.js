@@ -1,95 +1,106 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+import GaussSeidelSolver from "@/component/Gauss-Siedel"
+import JacobiSolver from "@/component/Jacobis"
+import Introduction from "@/component/Introduction"
+import Header from "@/component/Header"
 
-export default function Home() {
-  return (
+import EnterSize from "@/component/EnterSize"
+import EnterMatrix from "@/component/EnterMatrix"
+import EnterAssigned from "@/component/EnterAssigned"
+import EnterX from "@/component/EnterX"
+import EnterIteration from "@/component/EnterIteration"
+
+import { useEffect, useState } from "react";
+import styles from './page.module.css'
+export default function Home(){
+
+  const [isMobile,setIsMobile] = useState(false);
+  const [n, setN] = useState(0);
+  const [a, setA] = useState(Array.from({ length: 10 }, () => Array.from({ length: 10 }, () => 0)));
+  const [b, setB] = useState(Array.from({ length: 10 }, () => 0));
+  const [x, setX] = useState(Array.from({ length: 10 }, () => 0));
+  const [m, setM] = useState(0);
+
+  const [gaussResults, setGaussResults] = useState([]);
+  const [jacobiResults, setJacobiResults] = useState([]);
+  const [method,setMethod] = useState('jacobi');
+
+  const handleInputChange = (event, i, j) => {
+    const newValue = event.target.value;
+    const newArray = [...a];
+    newArray[i][j] = newValue;
+    setA(newArray);
+  };
+
+  const handleBInputChange = (event, i) => {
+    const newValue = event.target.value;
+    const newArray = [...b];
+    newArray[i] = newValue;
+    setB(newArray);
+  };
+
+  const handleXInputChange = (event, i) => {
+    const newValue = event.target.value;
+    const newArray = [...x];
+    newArray[i] = newValue;
+    setX(newArray);
+  };
+
+  useEffect(()=>{
+    const handleResize=()=>{
+      setIsMobile(window.innerWidth<707)
+    }
+    handleResize()
+    window.addEventListener("resize",handleResize);
+    return()=>window.removeEventListener("resize",handleResize);
+  },[])
+
+  return(
+    <>
+    <Header method={method} setMethod={setMethod}/>
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+      <div className={styles.fifty}>
+        <Introduction isMobile={isMobile}/>
+        <EnterSize n={n} setN={setN} isMobile={isMobile}/>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className={styles.fifty}>
+        <EnterMatrix n={n} handleInputChange={handleInputChange} isMobile={isMobile}/>
+        <EnterAssigned n={n} handleBInputChange={handleBInputChange} isMobile={isMobile}/>
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className={styles.fifty}>
+        <EnterX n={n} handleXInputChange={handleXInputChange} isMobile={isMobile}/>
+        <EnterIteration m={m} setM={setM} isMobile={isMobile}/>
       </div>
+      {
+        method==='jacobi'?(
+          <>
+          <JacobiSolver
+            x={x}
+            m={m}
+            n={n}
+            a={a}
+            b={b}
+            results={jacobiResults}
+            setResults={setJacobiResults}
+          />
+          </>
+        ):(
+          <>
+          <GaussSeidelSolver
+            x={x}
+            m={m}
+            n={n}
+            a={a}
+            b={b}
+            results={gaussResults}
+            setResults={setGaussResults}
+          />
+          </>
+        )
+      }
+      
+      
     </main>
-  );
+    </>
+  )
 }

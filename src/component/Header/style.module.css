@@ -1,0 +1,23 @@
+.header{
+    position: fixed;
+    height: 70px;
+    border-radius: 100px;
+    color: white;
+    background-color: #48484a;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.headerOption{
+    width: 150px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:0px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}

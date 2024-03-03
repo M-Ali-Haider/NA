@@ -1,0 +1,15 @@
+.enterX{
+    border-radius: 25px;
+    padding: 30px;
+    width: 50%;
+    background-color: rgba(240,240,240,255);
+}
+.enterX input{
+    max-width: 80px;
+    border: 1px solid #a8a8a8;
+}
+@media (max-width:700px) {
+    .enterX input{
+        max-width: 50px;
+    }
+}

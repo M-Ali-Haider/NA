@@ -1,0 +1,20 @@
+.introduction{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 0px;
+    border-radius: 25px;
+    background-color: rgba(240,240,240,255);
+    width: 50%;
+}
+.introductionUnit{
+    display: flex;
+    flex-direction: column;
+}
+.introductionHeading{
+
+}
+.introductionItself{
+
+}
