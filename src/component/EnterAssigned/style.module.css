@@ -18,9 +18,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: 20%;
     }
-    .enterAssigned{
-        width: 50px;
-    }
-    
 }
