@@ -12,6 +12,7 @@ import EnterIteration from "@/component/EnterIteration"
 
 import { useEffect, useState } from "react";
 import styles from './page.module.css'
+
 export default function Home(){
 
   const [isMobile,setIsMobile] = useState(false);
@@ -23,6 +24,7 @@ export default function Home(){
 
   const [gaussResults, setGaussResults] = useState([]);
   const [jacobiResults, setJacobiResults] = useState([]);
+  
   const [method,setMethod] = useState('jacobi');
 
   const handleInputChange = (event, i, j) => {
