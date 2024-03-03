@@ -4,7 +4,8 @@ import styles from './style.module.css';
 export default function EnterSize({ n, setN, isMobile }) {
   const handleInputChange = (e) => {
     const newValue = parseInt(e.target.value);
-    setN(newValue < 0 ? 0 : (isNaN(newValue) ? 0 : newValue));
+    setN(newValue > 9 ? 9 : (newValue < 0 ? 0 : (isNaN(newValue) ? 0 : newValue)));
+
   };
 
   return (
