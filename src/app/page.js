@@ -24,7 +24,7 @@ export default function Home(){
 
   const [gaussResults, setGaussResults] = useState([]);
   const [jacobiResults, setJacobiResults] = useState([]);
-  
+
   const [method,setMethod] = useState('jacobi');
 
   const handleInputChange = (event, i, j) => {
@@ -57,9 +57,14 @@ export default function Home(){
     return()=>window.removeEventListener("resize",handleResize);
   },[])
 
+
+  const resetState = () => {
+    setX(Array.from({ length: x.length }, () => 0));
+  };
+
   return(
     <>
-    <Header method={method} setMethod={setMethod}/>
+    <Header method={method} setMethod={setMethod} resetState={resetState}/>
     <main className={styles.main}>
       <div className={styles.fifty}>
         <Introduction isMobile={isMobile}/>
@@ -84,6 +89,7 @@ export default function Home(){
             b={b}
             results={jacobiResults}
             setResults={setJacobiResults}
+            resetState={resetState}
           />
           </>
         ):(
@@ -96,6 +102,7 @@ export default function Home(){
             b={b}
             results={gaussResults}
             setResults={setGaussResults}
+            resetState={resetState}
           />
           </>
         )

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Generate from '../Generate';
 
-function JacobiSolver({x,m,n,a,b,results,setResults}) {
+function JacobiSolver({x,m,n,a,b,results,setResults,resetState}) {
     const solveEquations = () => {
         let y = [...x];
         let iterations = m;
@@ -31,7 +31,7 @@ function JacobiSolver({x,m,n,a,b,results,setResults}) {
 
     return (
         <div>
-            <Generate solveEquations={solveEquations}/>
+            <Generate solveEquations={solveEquations} resetState={resetState}/>
             <div className='resultsContainer'>
                 <div className="headings">
                     <div>k</div>
