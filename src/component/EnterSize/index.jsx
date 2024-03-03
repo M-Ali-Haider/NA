@@ -10,7 +10,7 @@ export default function EnterSize({ n, setN, isMobile }) {
   return (
     <div className={styles.enterSize}>
       <label>Enter size of 2D array {isMobile?"":"(Square Matrix):"}</label>
-      <input type="number" value={n} onChange={handleInputChange} />
+      <input type="number" value={n} onChange={handleInputChange} max={9}/>
     </div>
   );
 }
