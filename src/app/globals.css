@@ -51,6 +51,8 @@ input{
 
 @media (max-width:550px) {
     .resultsContainer{
+        align-items:baseline;
+        justify-content: baseline;
         overflow-x: scroll;
     }
 }
